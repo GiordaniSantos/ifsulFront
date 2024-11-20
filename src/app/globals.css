@@ -47,6 +47,21 @@ a {
   display: none;
 }
 
+.container-text-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.linha {
+  flex: 1;
+  height: 1px;
+  background-color: #CCCCCC;
+  margin: 0 10px;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
