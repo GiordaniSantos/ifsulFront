@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Home() {
+export default function Login() {
     return (
         <div className="container" style={{display:"flex", justifyContent:"center", alignItems:"center", height: "85vh"}}>
             <div className="row">
@@ -14,13 +14,13 @@ export default function Home() {
                                 <h5 className="card-title mb-3">Login</h5>
                                 <form>
                                     <div className="mb-3">
-                                        <label htmlFor="exampleInputEmail1" className="form-label">Email:</label>
-                                        <input type="email" className="form-control" id="exampleInputEmail1"
+                                        <label htmlFor="email" className="form-label">Email:</label>
+                                        <input type="email" className="form-control" id="email"
                                                aria-describedby="emailHelp"/>
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="exampleInputPassword1" className="form-label">Senha:</label>
-                                        <input type="password" className="form-control" id="exampleInputPassword1"/>
+                                        <label htmlFor="senha" className="form-label">Senha:</label>
+                                        <input type="password" className="form-control" id="senha"/>
                                     </div>
                                     <button type="submit" className="btn btn-success mb-3"
                                             style={{width: '100%'}}>Entrar
@@ -34,7 +34,7 @@ export default function Home() {
                                         <div className="linha"></div>
                                     </div>
                                     Não possui uma conta?
-                                    <Link href="/" style={{marginLeft: "5px", color: "#198754", fontWeight: "bold", textDecoration: "none"}}>
+                                    <Link href="/register" style={{marginLeft: "5px", color: "#198754", fontWeight: "bold", textDecoration: "none"}}>
                                         Cadastre-se
                                     </Link>
                                 </form>
