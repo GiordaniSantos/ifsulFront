@@ -40,16 +40,37 @@ export default function Cabecalho() {
                                                 Início
                                             </Link>
                                         </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/projetos">
-                                                Meus Projetos
-                                            </Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link className="nav-link" href="/candidaturas">
-                                                Minhas Candidaturas
-                                            </Link>
-                                        </li>
+                                        {authData.user.id ?
+                                            (
+                                                <>
+                                                    <li className="nav-item">
+                                                        <Link className="nav-link" href="/projetos">
+                                                            Meus Projetos
+                                                        </Link>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <Link className="nav-link" href="/candidaturas">
+                                                            Minhas Candidaturas
+                                                        </Link>
+                                                    </li>
+                                                </>
+                                            )
+                                            : 
+                                            (
+                                                <>
+                                                    <li className="nav-item">
+                                                        <Link className="nav-link" href="/login">
+                                                            Logar
+                                                        </Link>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <Link className="nav-link" href="/register">
+                                                            Cadastrar
+                                                        </Link>
+                                                    </li>
+                                                </>
+                                            )  
+                                        }
                                     </ul>
                                 </div>
                             </div>
