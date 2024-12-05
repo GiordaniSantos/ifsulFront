@@ -1,9 +1,41 @@
 'use client';
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import api from "@/Services/api";
+import Swal from "sweetalert2";
 
 export default function Home() {
+    const [projetos, setProjetos] = useState<any>([]);
+
+    const buscarProjetos = async () => {
+        try {
+            
+            const resposta = await api.get('/projetos');
+            setProjetos(resposta.data);
+        } catch (error:any) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.response.data
+            });
+        }
+    };
+    
+    useEffect(() => {
+        buscarProjetos();
+    }, []);
+
+    function formatarData(dataString:string) {
+        const data = new Date(dataString);
+      
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        const ano = String(data.getFullYear());
+      
+        return `${dia}/${mes}/${ano}`;
+    }
+   
     return (
         <div className="container">
             <br />
@@ -95,43 +127,10 @@ export default function Home() {
                     </div>
                 </aside>
 
-                {/* Lista de projetos */}
                 <section className="col-md-9">
                     <div className="row g-4">
-                        {/* Cartão de Projeto */}
-                        {[
-                            {
-                                title: "Sistema de Gerenciamento de Tarefas",
-                                status: "Andamento",
-                                tags: ["Java", "Spring Boot", "MySQL"],
-                                author: "Anna Maria - 2A",
-                                published: "05/10/2024",
-                                due: "20/12/2024",
-                                badgeColor: "yellow",
-                                approval: "Aprovado",
-                            },
-                            {
-                                title: "Reformulação do Site Institucional",
-                                status: "Finalizado",
-                                tags: ["HTML", "CSS", "JavaScript"],
-                                author: "Pedro Borba - 4A",
-                                published: "15/09/2024",
-                                due: "01/10/2024",
-                                badgeColor: "green",
-                                approval: "Rejeitado",
-                            },
-                            {
-                                title: "Plataforma de Cursos Online",
-                                status: "Ideia",
-                                tags: ["PHP", "Laravel", "MySQL"],
-                                author: "João Miguel - 3A",
-                                published: "20/09/2024",
-                                due: "15/01/2025",
-                                badgeColor: "blue",
-                                approval: "Análise",
-                            },
-                        ].map((project, index) => (
-                            <div className="col-md-6" key={index}>
+                        {projetos.map((project:any) => (
+                            <div className="col-md-6" key={project.idProjeto}>
                                 <div
                                     className="card p-3"
                                     style={{
@@ -143,23 +142,20 @@ export default function Home() {
                                 >
                                     <div className="d-flex justify-content-between align-items-start">
                                         <div>
-                                            <h5 className="card-title mb-2">{project.title}</h5>
+                                            <h5 className="card-title mb-2">{project.nome}</h5>
                                             <div className="mb-3">
-                                                {project.tags.map((tag, idx) => (
-                                                    <span
-                                                        key={idx}
-                                                        className="badge bg-secondary me-2"
-                                                        style={{fontSize: "0.85rem"}}
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
+                                                <span
+                                                    className="badge bg-secondary me-2"
+                                                    style={{fontSize: "0.85rem"}}
+                                                >
+                                                    PHP
+                                                </span>
                                             </div>
                                             <span
-                                                className={`badge text-dark bg-${project.badgeColor}`}
+                                                className={`badge text-dark bg-`}
                                                 style={{fontSize: "0.85rem"}}
                                             >
-                                                {project.status}
+                                                {project.statusTipo}
                                             </span>
                                         </div>
                                         <span
@@ -171,16 +167,16 @@ export default function Home() {
                                                 borderRadius: "8px",
                                             }}
                                         >
-                                            {project.approval}
+                                            Aprovado
                                         </span>
                                     </div>
                                     <p className="mt-3 mb-1 text-muted" style={{fontSize: "0.9rem"}}>
                                         Autor: {project.author}
                                     </p>
                                     <p className="text-muted" style={{fontSize: "0.9rem"}}>
-                                        Publicado em: {project.published} | Previsão: {project.due}
+                                        Publicado em: {formatarData(project.dataCriacao)} | Previsão: {formatarData(project.dataEstimadaTermino)}
                                     </p>
-                                    <Link className="btn btn-outline-success w-100" href="/projeto/1">
+                                    <Link className="btn btn-outline-success w-100" href={`/projeto/${project.idProjeto}`}>
                                         Saiba Mais
                                     </Link>
                                 </div>
