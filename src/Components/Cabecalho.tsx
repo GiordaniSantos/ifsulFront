@@ -61,15 +61,10 @@ export default function Cabecalho() {
                                 <Image src="/user-icon.png" width={60} height={60} alt="Logo"/>
                             </a>
                             <ul className="dropdown-menu">
-                                <li>
-                                    <Link className="dropdown-item" href="/login">
-                                        Logar
-                                    </Link>
-                                </li>
-                                <li><a className="dropdown-item" href="#">Perfil</a></li>
                                 { authData.user.id ?  
                                     (
                                         <>
+                                        <li><a className="dropdown-item" href="#">Perfil</a></li>
                                         <li>
                                             <hr className="dropdown-divider"/>
                                         </li>
@@ -77,9 +72,21 @@ export default function Cabecalho() {
                                         </>
                                     )
                                     : 
-                                    null
+                                    (
+                                        <>
+                                            <li>
+                                                <Link className="dropdown-item" href="/login">
+                                                    Logar
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link className="dropdown-item" href="/register">
+                                                    Cadastrar
+                                                </Link>
+                                            </li>
+                                        </>
+                                    )
                                 }
-                               
                             </ul>
                         </span>
                     </div>
