@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import axios from "axios";
+import api from "@/Services/api";
 import { useRouter } from "next/navigation"; 
 
 export default function Login() {
@@ -14,11 +14,10 @@ export default function Login() {
         e.preventDefault(); 
 
         try {
-            const response = await axios.post("http://localhost:8080/login", {
+            const response = await api.post("/login", {
                 email: email,
                 senha: senha,
             });
-
           
             localStorage.setItem("token", response.data.token);
 
