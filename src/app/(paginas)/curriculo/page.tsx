@@ -60,34 +60,18 @@ export default function Register() {
   };
 
   return (
-    <div
-      className="container"
-      style={{
-        width: "90%",
-        maxWidth: "1800px",
-        margin: "0 auto",
-        padding: "50px",
-      }}
-    >
+    <div className="container-curriculo">
       <div className="row">
-        <div
-          className="card"
-          style={{
-            width: "100%",
-            borderRadius: 25,
-            backgroundColor: "#DCDCDC",
-            border: "none",
-            boxShadow: "1px 2px",
-            padding: "35px",
-          }}
-        >
+        <div className="card-curriculo">
           <h2 style={{ textAlign: "initial", marginBottom: "20px" }}>
             Meu currículo
           </h2>
 
           {/* Experiência acadêmica */}
           <div style={{ marginBottom: "15px" }}>
-            <h4>Experiência acadêmica</h4>
+            <h4>
+              Experiência acadêmica
+              </h4>
             <div
               style={{
                 display: "grid",
@@ -208,18 +192,7 @@ export default function Register() {
             </div>
             <button
               onClick={adicionarFormacao}
-              style={{
-                marginTop: "15px",
-                backgroundColor: "#DCDCDC",
-                color: "#198754",
-                border: "2px dashed #999999",
-                borderRadius: "10px",
-                width: "100%",
-                textAlign: "left",
-                fontWeight: "bold",
-                cursor: "pointer",
-                padding: "5px",
-              }}
+              className="button-curriculo-add"
             >
               + Adicionar formação
             </button>
@@ -227,12 +200,7 @@ export default function Register() {
               {formacoes.map((formacao, index) => (
                 <div
                   key={index}
-                  style={{
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    marginBottom: "10px",
-                  }}
+                  className="div-curriculo2"
                 >
                   <p>
                     <strong>Formação:</strong> {formacao.formacao}
@@ -254,14 +222,7 @@ export default function Register() {
                   </p>
                   <button
                     onClick={() => removerFormacao(index)}
-                    style={{
-                      backgroundColor: "#DC3545",
-                      color: "#fff",
-                      border: "none",
-                      padding: "5px 10px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
+                    className="button-curriculo-excluir"
                   >
                     Excluir
                   </button>
@@ -278,12 +239,7 @@ export default function Register() {
               como você se relaciona com as pessoas.
             </p>
             <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                marginBottom: "10px",
-              }}
+              className="div-curriculo-habilidades"
             >
               <input
                 type="text"
@@ -291,62 +247,29 @@ export default function Register() {
                 value={novaHabilidade}
                 onChange={(e) => setNovaHabilidade(e.target.value)}
                 onKeyDown={handleKeyPress}
-                style={{
-                  flex: 1,
-                  padding: "10px",
-                  borderRadius: "5px",
-                  border: "1px solid #ccc",
-                  backgroundColor: "#DCDCDC",
-                  color: "#000000",
-                }}
+                className="input-curriculo"
               />
               <button
                 onClick={adicionarHabilidade}
-                style={{
-                  backgroundColor: "#198754",
-                  color: "#fff",
-                  border: "none",
-                  padding: "10px 20px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
+                className="button-curriculo-addHabilidade"
               >
                 Adicionar
               </button>
             </div>
             <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "10px",
-              }}
+              className="div-curriculo3"
             >
               {habilidades.map((habilidade, index) => (
                 <span
                   key={index}
-                  style={{
-                    backgroundColor: "#198754",
-                    color: "#fff",
-                    padding: "5px 10px",
-                    borderRadius: "20px",
-                    fontSize: "14px",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "5px",
-                  }}
+                  className="span-curriculo"
                 >
                   {habilidade}
                   <button
                     onClick={() => removerHabilidade(index)}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "#fff",
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                    }}
+                    className="button-curriculo-removeHabilidade"
                   >
-                    ×
+                    x
                   </button>
                 </span>
               ))}
@@ -354,17 +277,7 @@ export default function Register() {
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <button
-              style={{
-                backgroundColor: "#198754",
-                color: "#fff",
-                border: "none",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                fontSize: "16px",
-                cursor: "pointer",
-              }}
-            >
+            <button className="button-curriculo-salvar">
               Salvar
             </button>
           </div>
@@ -373,3 +286,4 @@ export default function Register() {
     </div>
   );
 }
+

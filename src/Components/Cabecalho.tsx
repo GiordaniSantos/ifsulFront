@@ -41,12 +41,12 @@ export default function Cabecalho() {
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link" href="/">
+                                            <Link className="nav-link" href="/projetos">
                                                 Meus Projetos
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link" href="/">
+                                            <Link className="nav-link" href="/candidaturas">
                                                 Minhas Candidaturas
                                             </Link>
                                         </li>

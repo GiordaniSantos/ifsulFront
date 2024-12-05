@@ -63,6 +63,22 @@ a {
   margin: 0 10px;
 }
 
+.container-curriculo {
+  width: 90%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+.card-curriculo {
+  width: 100%;
+  border-radius: 25px;
+  background-color: #DCDCDC;
+  border: none;
+  box-shadow: 1px 2px;
+  padding: 35px;
+}
+
 .div-curriculo {
   width: 100%;
   padding: 10px;
@@ -70,6 +86,221 @@ a {
   border: 1px solid #ccc;
   background-color: #DCDCDC;
   color: #000000;
+}
+
+.button-curriculo-add {
+  margin-top: 15px;
+  background-color: #DCDCDC;
+  color: #198754;
+  border: 2px dashed #999999;
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.div-curriculo2 {
+
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.button-curriculo-excluir {
+  background-color: #DC3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.div-curriculo-habilidades {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-curriculo {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #DCDCDC;
+  color: #000000;
+}
+
+.button-curriculo-addHabilidade {
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.div-curriculo3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.span-curriculo {
+  background-color: #198754;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.button-curriculo-removeHabilidade {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button-curriculo-salvar {
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.div-projetos {
+  font-size: "Arial, sans-seriF";
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.aside-projetos {
+  width: 250px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.h3-projetos {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.p-projetos {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.label-projetos {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.checkbox-projetos {
+  margin-right: 5px;
+  width: 16px; 
+  height: 16px; 
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer; 
+}
+
+.checkbox-projetos:checked {
+  background-color: #28a745;
+}
+
+
+.div-projetos2 {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.input-projetos {
+  background-color: #FFFFFF;
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #000000;
+}
+
+.button-projetos-pesquisar{
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.button-projetos-editar {
+  position: absolute; 
+  bottom: 25px; 
+  right: 10px;
+  padding: 5px 15px;
+  background-color: #347B3E;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cartao-projetos {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.span-projetos {
+  padding: 5px 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.p-projetos2 {
+  background-color: #F9E68A;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.div-projetos3 {
+  flex: 1;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #28a745;
+  font-size: 16px;
 }
 
 @media (prefers-color-scheme: dark) {
