@@ -2,11 +2,11 @@ import React from "react";
 
 export default function Projects() {
     return (
-        <div className="container-fluid" style={{padding: "20px"}}>
-
+        <div className="container">
+            <br />
             <div
                 className="input-group me-4"
-                style={{maxWidth: "300px", backgroundColor: "#f5f5f5", borderRadius: "20px"}}
+                style={{maxWidth: "300px", backgroundColor: "#f5f5f5", borderRadius: "20px", marginBottom: "15px"}}
             >
                 <input
                     type="text"
@@ -135,7 +135,8 @@ export default function Projects() {
                                     className="card p-3"
                                     style={{
                                         borderRadius: "15px",
-                                        border: "none",
+                                        height: 280,
+                                        overflowY: "auto",
                                         boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
                                     }}
                                 >
