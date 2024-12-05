@@ -1,7 +1,25 @@
+'use client';
+
 import Link from "next/link";
 import Image from 'next/image'
+import { AppDispatch, useAppSelector } from "@/store";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { actions } from "@/store/auth/auth-slice";
 
 export default function Cabecalho() {
+    const dispatch = useDispatch<AppDispatch>();
+
+    const authData = useAppSelector((state) => state.auth);
+
+    useEffect(() => {
+        require("bootstrap/dist/js/bootstrap.bundle.min.js");
+        dispatch(actions.verifyUserLogged());
+    }, []);
+
+    function logout() {
+        dispatch(actions.logout());
+    }
 
     return (
         <div style={{backgroundColor: '#D9D9D9'}}>
@@ -49,12 +67,38 @@ export default function Cabecalho() {
                                     </Link>
                                 </li>
                                 <li><a className="dropdown-item" href="#">Perfil</a></li>
-                                <li>
-                                    <hr className="dropdown-divider"/>
-                                </li>
-                                <li><a className="dropdown-item" href="#">Sair</a></li>
+                                { authData.user.id ?  
+                                    (
+                                        <>
+                                        <li>
+                                            <hr className="dropdown-divider"/>
+                                        </li>
+                                        <li><a className="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalSair" >Sair</a></li> 
+                                        </>
+                                    )
+                                    : 
+                                    null
+                                }
+                               
                             </ul>
                         </span>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="modalSair" aria-labelledby="modalSairLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="modalSairLabel">Pronto para sair?</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            Selecione "Sair" abaixo se estiver pronto para encerrar sua sessão atual.
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={logout} style={{color: '#FFF'}}>Sair</button>
+                        </div>
                     </div>
                 </div>
             </div>

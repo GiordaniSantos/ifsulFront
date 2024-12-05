@@ -5,11 +5,15 @@ import Link from "next/link";
 import api from "@/Services/api";
 import { useRouter } from "next/navigation"; 
 import Swal from "sweetalert2";
+import { AppDispatch } from "@/store";
+import { actions } from "@/store/auth/auth-slice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
@@ -19,8 +23,19 @@ export default function Login() {
                 email: email,
                 senha: senha,
             });
-          
-            //localStorage.setItem("token", response.data.token);
+
+            dispatch(actions.login({
+                user: {
+                    email: response.data.userDetails.email,
+                    fotoDePerfilUrl: response.data.userDetails.fotoDePerfilUrl,
+                    id: response.data.userDetails.id,
+                    matricula: response.data.userDetails.matricula,
+                    nome: response.data.userDetails.nome,
+                    usuarioTipo: response.data.userDetails.usuarioTipo
+                },
+                token: response.data.token
+            }))
+
             Swal.fire({
                 icon: "success",
                 title: "Login efetuado com sucesso!",
@@ -29,8 +44,7 @@ export default function Login() {
             });
 
             router.push("/"); 
-        } catch (error) {
-        
+        } catch (error: any) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

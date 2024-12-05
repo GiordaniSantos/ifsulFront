@@ -5,9 +5,10 @@ import Rodape from "@/Components/Rodape";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
 import Head from "next/head";
+import { StoreWrapper } from "@/store/StoreWrapper";
 
 export interface PaginaProps {
-    children: any
+    children: React.ReactNode
 }
 
 export default function Pagina(props: PaginaProps) {
@@ -21,11 +22,13 @@ export default function Pagina(props: PaginaProps) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <div>
-                <Cabecalho />
-                    <main>
-                        {props.children}
-                    </main>
-                <Rodape/>
+                <StoreWrapper>
+                    <Cabecalho />
+                        <main>
+                            {props.children}
+                        </main>
+                    <Rodape/>
+                </StoreWrapper>
             </div>
         </div>
     )

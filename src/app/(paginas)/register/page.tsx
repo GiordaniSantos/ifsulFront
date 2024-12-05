@@ -34,16 +34,13 @@ export default function Register() {
                 senha: senha,
             });
 
-            console.log(response)
-
             Swal.fire({
-                icon: "success",
                 title: "Conta criada sucesso!",
-                showConfirmButton: false,
-                timer: 1500
+                text: "Agora você pode acessar a plataforma.",
+                icon: "success"
             });
 
-            router.push("/"); 
+            router.push("/login"); 
         } catch (error) {
             Swal.fire({
                 icon: "error",
