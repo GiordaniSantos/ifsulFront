@@ -1,6 +1,58 @@
+'use client';
+
+import { FormEvent, useState } from "react";
 import Link from "next/link";
+import api from "@/Services/api";
+import { useRouter } from "next/navigation"; 
+import Swal from "sweetalert2";
 
 export default function Register() {
+    const [nome, setNome] = useState("");
+    const [matricula, setMatricula] = useState("");
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [confirmarSenha, setConfirmarSenha] = useState("");
+    const router = useRouter();
+
+    const registrar = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); 
+
+        if(confirmarSenha != senha){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Os campos Confirmar Senha e Senha não coincidem!"
+            });
+            return
+        }
+
+        try {
+            const response = await api.post("/usuarios", {
+                nome: nome,
+                matricula: matricula,
+                email: email,
+                senha: senha,
+            });
+
+            console.log(response)
+
+            Swal.fire({
+                icon: "success",
+                title: "Conta criada sucesso!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            router.push("/"); 
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Erro ao criar conta: " + error
+            });
+        }
+    };
+
     return (
         <div className="container" style={{display:"flex", justifyContent:"center", alignItems:"center", height: "85vh"}}>
             <div className="row">
@@ -12,27 +64,26 @@ export default function Register() {
                         <div className="col-md-6" style={{padding: "20px 55px"}}>
                             <div className="card-body">
                                 <h5 className="card-title mb-3">Criar uma conta</h5>
-                                <form>
+                                <form onSubmit={registrar}>
                                     <div className="mb-3">
                                         <label htmlFor="nome" className="form-label">Nome:</label>
-                                        <input type="email" className="form-control" id="nome"/>
+                                        <input type="text" required value={nome} onChange={(e) => setNome(e.target.value)} className="form-control" id="nome"/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="matricula" className="form-label">Matrícula:</label>
-                                        <input type="email" className="form-control" id="matricula"/>
+                                        <input type="text" value={matricula} onChange={(e) => setMatricula(e.target.value)} className="form-control" id="matricula"/>
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="email" className="form-label">Email acadêmico:</label>
-                                        <input type="email" className="form-control" id="email"
-                                               aria-describedby="emailHelp"/>
+                                        <label htmlFor="email" className="form-label">Email:</label>
+                                        <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="email" aria-describedby="emailHelp"/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="senha" className="form-label">Senha:</label>
-                                        <input type="password" className="form-control" id="senha"/>
+                                        <input type="password" required value={senha} onChange={(e) => setSenha(e.target.value)}  className="form-control" id="senha"/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="senhaConfirmation" className="form-label">Confirme sua senha:</label>
-                                        <input type="password" className="form-control" id="senhaConfirmation"/>
+                                        <input type="password" required value={confirmarSenha} onChange={(e) => setConfirmarSenha(e.target.value)} className="form-control" id="senhaConfirmation"/>
                                     </div>
                                     <button type="submit" className="btn btn-success mb-3" style={{width: '100%'}}>
                                         Cadastrar

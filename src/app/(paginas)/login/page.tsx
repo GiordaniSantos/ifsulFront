@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import api from "@/Services/api";
 import { useRouter } from "next/navigation"; 
+import Swal from "sweetalert2";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -19,12 +20,22 @@ export default function Login() {
                 senha: senha,
             });
           
-            localStorage.setItem("token", response.data.token);
+            //localStorage.setItem("token", response.data.token);
+            Swal.fire({
+                icon: "success",
+                title: "Login efetuado com sucesso!",
+                showConfirmButton: false,
+                timer: 1500
+            });
 
-            router.push("/home"); 
+            router.push("/"); 
         } catch (error) {
-            console.error("Erro ao fazer login:", error);
-            alert("Credenciais inválidas. Por favor, tente novamente.");
+        
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Erro ao fazer login: " + error.response.data
+            });
         }
     };
 
