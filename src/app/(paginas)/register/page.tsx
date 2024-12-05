@@ -41,11 +41,11 @@ export default function Register() {
             });
 
             router.push("/login"); 
-        } catch (error) {
+        } catch (error : any) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Erro ao criar conta: " + error
+                text: "Erro ao criar conta: " + error.response.data
             });
         }
     };
