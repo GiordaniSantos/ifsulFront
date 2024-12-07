@@ -1,12 +1,21 @@
 "use client";
 
+import api from "@/Services/api";
+import { useRouter } from "next/navigation"; 
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function CriarProjeto() {
+  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [status, setStatus] = useState("");
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataFim, setDataFim] = useState("");
   const [tecnologias, setTecnologias] = useState<string[]>([]);
   const [membros, setMembros] = useState<string[]>([]);
   const [tecnologiaInput, setTecnologiaInput] = useState("");
   const [membroInput, setMembroInput] = useState("");
+  const router = useRouter();
 
   const adicionarTecnologia = () => {
     if (tecnologiaInput && !tecnologias.includes(tecnologiaInput)) {
@@ -28,6 +37,33 @@ export default function CriarProjeto() {
 
   const excluirMembro = (index: number) => {
     setMembros(membros.filter((_, i) => i !== index));
+  };
+
+  const criarProjeto = async () => {
+    try {
+      const response = await api.post("/projetos", {
+        nome: nome,
+        descricao: descricao,
+        dataCriacao: dataInicio,
+        dataEstimadaTermino: dataFim,
+        statusTipo: status
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Projeto criado com sucesso!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+        router.push("/projetos"); 
+    } catch (error: any) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response.data
+      });
+    }
   };
 
   return (
@@ -71,6 +107,7 @@ export default function CriarProjeto() {
               id="titulo"
               className="form-control"
               placeholder="Ex: Sistema de Gerenciamento"
+              onChange={(e) => setNome(e.target.value)}
               style={{ backgroundColor: "#dcdcdc", border: "2px solid #181C1C" }} 
             />
           </div>
@@ -84,6 +121,7 @@ export default function CriarProjeto() {
               className="form-control"
               rows={5}
               placeholder="Descreva o projeto..."
+              onChange={(e) => setDescricao(e.target.value)}
               style={{ backgroundColor: "#dcdcdc", border: "2px solid #181C1C" }} 
             ></textarea>
           </div>
@@ -223,7 +261,7 @@ export default function CriarProjeto() {
           </div>
         </div>
       </div>
-
+      
       {/* Coluna da Direita */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         <h4
@@ -268,10 +306,11 @@ export default function CriarProjeto() {
               backgroundColor: "#dcdcdc",
               color: "#333",
             }}
+            onChange={(e) => setStatus(e.target.value)}
           >
-            <option value="idealizacao">Idealização</option>
-            <option value="andamento">Andamento</option>
-            <option value="finalizado">Finalizado</option>
+            <option value="IDEACAO">Idealização</option>
+            <option value="ANDAMENTO">Andamento</option>
+            <option value="FINALIZADO">Finalizado</option>
           </select>
         </div>
 
@@ -306,6 +345,7 @@ export default function CriarProjeto() {
               type="date"
               id="inicio"
               className="form-control"
+              onChange={(e) => setDataInicio(e.target.value+'T15:00:00')}
               style={{ backgroundColor: "#dcdcdc", width: "300px", border: "2px solid #181C1C" }} 
             />
           </div>
@@ -317,6 +357,9 @@ export default function CriarProjeto() {
               type="date"
               id="conclusao"
               className="form-control"
+              onChange={(e) => { 
+                setDataFim(e.target.value+'T15:00:00')
+              }}
               style={{ backgroundColor: "#dcdcdc", width: "300px", border: "2px solid #181C1C"  }} 
             />
           </div>
@@ -340,6 +383,7 @@ export default function CriarProjeto() {
               borderRadius: "5px",
               cursor: "pointer",
             }}
+            onClick={criarProjeto}
           >
             Publicar
           </button>
