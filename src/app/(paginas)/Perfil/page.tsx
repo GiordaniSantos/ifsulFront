@@ -1,16 +1,26 @@
 'use client';
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { useAppSelector } from "@/store";
 
 export default function Profile() {
     const [nome, setNome] = useState("");
-    const [sobrenome, setSobrenome] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
     const [email, setEmail] = useState("");
     const [matricula, setMatricula] = useState("");
     const router = useRouter();
+
+    const authData = useAppSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (authData.user) {
+            setNome(authData.user.nome);
+            setEmail(authData.user.email);
+            setMatricula(authData.user.matricula);
+        }
+    }, [authData.user]);
 
     const salvarPerfil = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,7 +29,7 @@ export default function Profile() {
             const response = await fetch("/api/usuarios/perfil", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nome, sobrenome, dataNascimento, email, matricula }),
+                body: JSON.stringify({ nome, dataNascimento, email, matricula }),
             });
 
             if (response.ok) {
@@ -60,10 +70,6 @@ export default function Profile() {
                     <div className="mb-3">
                         <label htmlFor="nome" className="form-label">Nome *</label>
                         <input type="text" required value={nome} onChange={(e) => setNome(e.target.value)} className="form-control" id="nome" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="sobrenome" className="form-label">Sobrenome *</label>
-                        <input type="text" required value={sobrenome} onChange={(e) => setSobrenome(e.target.value)} className="form-control" id="sobrenome" />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="dataNascimento" className="form-label">Data de Nascimento *</label>
