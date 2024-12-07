@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function App() {
@@ -47,39 +48,50 @@ export default function App() {
         </aside>
         <main style={{ flex: 1, padding: "20px" }}>
           <div className="div-projetos2">
-            <input type="text" placeholder="Pesquisar" className="input-projetos"/>
-            <button className="button-projetos-pesquisar" style={{marginLeft: "10px"}}>
+            <input
+              type="text"
+              placeholder="Pesquisar"
+              className="input-projetos"
+            />
+            <button
+              className="button-projetos-pesquisar"
+              style={{ marginLeft: "10px" }}
+            >
               Pesquisar
             </button>
           </div>
           <div style={{ display: "flex", gap: "20px" }}>
             {/* Cartão de Projeto */}
             <div className="cartao-projetos">
-              <h4 style={{ margin: "0 0 10px" }}>Desenvolvimento de Aplicativo de Fisioterapia</h4>
-              <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
-                <span className="span-projetos">
-                  Flutter
-                </span>
-                <span className="span-projetos">
-                  Dart
-                </span>
-                <span className="span-projetos">
-                  MySQL
-                </span>
+              <h4 style={{ margin: "0 0 10px" }}>
+                Desenvolvimento de Aplicativo de Fisioterapia
+              </h4>
+              <div
+                style={{ display: "flex", gap: "10px", marginBottom: "10px" }}
+              >
+                <span className="span-projetos">Flutter</span>
+                <span className="span-projetos">Dart</span>
+                <span className="span-projetos">MySQL</span>
               </div>
-              <p className="p-projetos2">
-                Andamento
+              <p className="p-projetos2">Andamento</p>
+              <p style={{ fontSize: "12px", margin: "10px 0" }}>
+                Autor: Lucas Veiga - 3A
               </p>
-              <p style={{ fontSize: "12px", margin: "10px 0" }}>Autor: Lucas Veiga - 3A</p>
-              <p style={{ fontSize: "12px", marginBottom: "10px", color: "#555" }}>
+              <p
+                style={{
+                  fontSize: "12px",
+                  marginBottom: "10px",
+                  color: "#555",
+                }}
+              >
                 Publicado em: 01/10/2024 | Previsão: 30/12/2024
               </p>
-              <button className="button-projetos-editar">
-                Editar
-              </button>
+              <button className="button-projetos-editar">Editar</button>
             </div>
             <div className="div-projetos3">
-              <span>+ Criar Novo Projeto</span>
+              <span>
+                <Link href={"/projetos/create"}>+ Criar Novo Projeto </Link>
+              </span>
             </div>
           </div>
         </main>
