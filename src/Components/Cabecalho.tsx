@@ -85,7 +85,11 @@ export default function Cabecalho() {
                                 { authData.user.id ?  
                                     (
                                         <>
-                                        <li><a className="dropdown-item" href="#">Perfil</a></li>
+                                        <li>
+                                            <Link className="dropdown-item" href="/Perfil">
+                                                Perfil
+                                            </Link>
+                                        </li>
                                         <li>
                                             <hr className="dropdown-divider"/>
                                         </li>
